@@ -1,5 +1,7 @@
 {
   "projects": {
     "default": "med-dash-enterprise"
-  }
+  },
+  "targets": {},
+  "etags": {}
 }
