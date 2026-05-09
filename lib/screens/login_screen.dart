@@ -62,7 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
               style: TextStyle(
                 fontSize: 32,
                 fontWeight: FontWeight.w900, // Extra bold
-                color: Colors.blue.shade900, // Deep medical blue
+                color: const Color.fromARGB(255, 52, 7, 124), // Deep medical blue
                 letterSpacing: 1.2,
                 fontFamily:
                     'Georgia', // You can use standard fonts or custom ones
@@ -72,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Text(
               "Med Dash Enterprise",
               style: TextStyle(
-                color: Colors.grey.shade600,
+                color: const Color.fromARGB(255, 221, 121, 121),
                 fontSize: 16,
                 fontStyle: FontStyle.italic,
               ),

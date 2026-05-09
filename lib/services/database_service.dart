@@ -10,7 +10,7 @@ class DatabaseService {
   String get uid => FirebaseAuth.instance.currentUser?.uid ?? '';
 
   // ==========================
-  //      PATIENTS SECTION
+  //        PATIENTS SECTION
   // ==========================
 
   // Streams only the patients belonging to the current user
@@ -25,10 +25,10 @@ class DatabaseService {
 
   Future<void> addPatient(String name, int age, String condition) {
     return _db.collection('patients').add({
-      'patient': name,
+      'name': name, // Changed to 'name' to match typical model naming
       'age': age,
       'condition': condition,
-      'userId': uid, // Multi-user security link
+      'userId': uid,
     });
   }
 
@@ -40,7 +40,6 @@ class DatabaseService {
   //     APPOINTMENTS SECTION
   // ==========================
 
-  // Streams only the appointments belonging to the current user
   Stream<List<Appointment>> getAppointments() {
     return _db
         .collection('appointments')
@@ -53,15 +52,16 @@ class DatabaseService {
 
   Future<void> addAppointment(String name, DateTime date, String status) {
     return _db.collection('appointments').add({
-      'patient name': name,
+      'patientName': name, // Changed to camelCase for consistency
       'date': Timestamp.fromDate(date),
       'status': status,
-      'userId': uid, // Multi-user security link
+      'userId': uid,
     });
   }
 
-  Future<void> updateAppointmentStatus(String id, String newStatus) {
-    return _db.collection('appointments').doc(id).update({
+  // FIXED: This is now correctly inside the class and unified
+  Future<void> updateAppointmentStatus(String id, String newStatus) async {
+    return await _db.collection('appointments').doc(id).update({
       'status': newStatus,
     });
   }
@@ -74,7 +74,6 @@ class DatabaseService {
   //      INVENTORY SECTION
   // ==========================
 
-  // Streams only the inventory items belonging to the current user
   Stream<QuerySnapshot> getInventory() {
     return _db
         .collection('inventory')
@@ -85,10 +84,10 @@ class DatabaseService {
 
   Future<void> addInventoryItem(String name, int quantity) {
     return _db.collection('inventory').add({
-      'item name': name,
+      'itemName': name,
       'quantity': quantity,
       'timestamp': FieldValue.serverTimestamp(),
-      'userId': uid, // Multi-user security link
+      'userId': uid,
     });
   }
 
@@ -101,4 +100,4 @@ class DatabaseService {
   Future<void> deleteInventoryItem(String id) {
     return _db.collection('inventory').doc(id).delete();
   }
-}
+} // <--- FINAL CLASS BRACKET (Nothing should be below this)

@@ -12,7 +12,7 @@ class Patient {
     Map data = doc.data() as Map<String, dynamic>;
     return Patient(
       id: doc.id,
-      name: data['patient'] ?? 'Unknown',
+      name: data['name'] ?? 'Unknown',
       age: data['age'] ?? 0,
       condition: data['condition'] ?? 'No condition specified',
     );

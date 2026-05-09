@@ -12,7 +12,7 @@ class Appointment {
     Map data = doc.data() as Map<String, dynamic>;
     return Appointment(
       id: doc.id,
-      patientName: data['patient name'] ?? 'Unknown',
+      patientName: data['patientName'] ?? 'Unknown',
       date: (data['date'] as Timestamp).toDate(),
       status: data['status'] ?? 'Pending',
     );
