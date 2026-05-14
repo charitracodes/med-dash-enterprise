@@ -36,15 +36,14 @@ class _ClinicAppState extends State<ClinicApp> {
       title: 'Med Dash Enterprise',
       themeMode: _themeMode,
 
-      // --- LIGHT THEME (Enterprise Cobalt) ---
-      // LIGHT THEME
+      // --- LIGHT THEME ---
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color(0xFF1976D2),
           brightness: Brightness.light,
         ),
-        // CHANGE THIS LINE: Use CardThemeData
+        // FIXED: Correct syntax for CardTheme
         cardTheme: const CardThemeData(
           elevation: 8,
           shape: RoundedRectangleBorder(
@@ -53,14 +52,14 @@ class _ClinicAppState extends State<ClinicApp> {
         ),
       ),
 
-      // DARK THEME
+      // --- DARK THEME ---
       darkTheme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color(0xFF1976D2),
           brightness: Brightness.dark,
         ),
-        // CHANGE THIS LINE: Use CardThemeData
+        // FIXED: Correct syntax for CardTheme
         cardTheme: const CardThemeData(
           elevation: 12,
           shape: RoundedRectangleBorder(
@@ -69,6 +68,14 @@ class _ClinicAppState extends State<ClinicApp> {
         ),
       ),
 
+      // FIXED: The "Generator" error. 
+      // We define the routes here so Navigator.pushNamed('/dashboard') works.
+      routes: {
+        '/login': (context) => const LoginScreen(),
+        '/dashboard': (context) => ClinicManagement(onThemeToggle: toggleTheme),
+      },
+
+      // Use StreamBuilder for the initial entry point
       home: StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
@@ -77,6 +84,7 @@ class _ClinicAppState extends State<ClinicApp> {
               body: Center(child: CircularProgressIndicator()),
             );
           }
+          // If user is already logged in, go to Management, else go to Login
           if (snapshot.hasData) {
             return ClinicManagement(onThemeToggle: toggleTheme);
           }

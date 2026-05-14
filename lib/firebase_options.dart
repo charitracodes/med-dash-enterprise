@@ -21,10 +21,7 @@ class DefaultFirebaseOptions {
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for android - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return android;
       case TargetPlatform.iOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for ios - '
@@ -60,5 +57,12 @@ class DefaultFirebaseOptions {
     authDomain: 'med-dash-enterprise.firebaseapp.com',
     storageBucket: 'med-dash-enterprise.firebasestorage.app',
     measurementId: 'G-W0B6WCWYQD',
+  );
+  static const FirebaseOptions android = FirebaseOptions(
+  apiKey: 'AIzaSyApiETEYP92UeQ4xZsntVbqKeC3saexVU4',        // Found in current_key
+  appId: '1:645760022007:android:55f1bc741002ffc7de6af2',    // Found in mobilesdk_app_id
+  messagingSenderId: '645760022007', // Matches your web sender ID
+  projectId: 'med-dash-enterprise',
+  storageBucket: 'med-dash-enterprise.firebasestorage.app',
   );
 }
